@@ -10,7 +10,6 @@ my %Domains = qw( .cnn.com 1 .usatoday.com 3 .doubleclick.net 1);
 my $jar = HTTP::Cookies::iCab->new( File => 't/Cookies.dat' );
 isa_ok( $jar, 'HTTP::Cookies::iCab' );
 
-
 my $hash = $jar->{COOKIES};
 
 my $domain_count = keys %$hash;
