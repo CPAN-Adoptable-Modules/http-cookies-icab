@@ -15,10 +15,8 @@ WriteMakefile
         'NAME'           => 'HTTP::Cookies::iCab',
         'VERSION_FROM'   => 'lib/iCab.pm',
  		'PREREQ_PM'      => {
- 			'Date::Manip'           => '0',
  			'File::Find::Rule'      => '0',
  			'HTTP::Cookies'         => '1.25',
- 			'Mac::PropertyList'     => '0',
  			'Test::Manifest'        => '0.9',
  			'Test::More'            => '0',
  			'Test::Pod'             => '0.72',
