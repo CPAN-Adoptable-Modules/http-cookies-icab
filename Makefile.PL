@@ -18,7 +18,7 @@ unless( $@ )
 WriteMakefile
         (
         'NAME'           => 'HTTP::Cookies::iCab',
-		'VERSION'        => '0.91',
+		'VERSION_FROM'   => 'lib/iCab.pm',
  		'PREREQ_PM'      => {
  			'HTTP::Cookies'         => '1.25',
  			'Test::More'            => '0',
