@@ -13,7 +13,8 @@ sub ExtUtils::MM_Any::test_via_harness
 WriteMakefile
         (
         'NAME'           => 'HTTP::Cookies::iCab',
-        'VERSION_FROM'   => 'lib/iCab.pm',
+#        'VERSION_FROM'   => 'lib/iCab.pm',
+		'VERSION'        => '0.90_01',
  		'PREREQ_PM'      => {
  			'File::Find::Rule'      => '0',
  			'HTTP::Cookies'         => '1.25',
