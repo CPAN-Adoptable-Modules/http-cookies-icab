@@ -5,3 +5,8 @@
 	understand the entire format, but I can pull out the stuff that
 	HTTP::Cookies needs.
 
+0.91 - Fri Sep 17 13:22:59 2004
+ * distribution cleanups: no need to upgrade
+ * this is a non-developer release, although it might still have
+ problems
+
