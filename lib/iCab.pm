@@ -52,34 +52,78 @@ use vars qw( $VERSION );
 
 use constant TRUE   => 'TRUE';
 use constant FALSE  => 'FALSE';
-use constant OFFSET => 2_082_823_233;
+use constant OFFSET => 2_082_823_200;
 
 $VERSION = sprintf "%2d.%02d", q$Revision$ =~ m/ (\d+) \. (\d+) /xg;
+
+my $Debug = 0;
 
 sub load
 	{
     my( $self, $file ) = @_;
  
     $file ||= $self->{'file'} || return;
- 
-    open my $fh, $file or return;
+  	
+    open my $fh, $file or die "Could not open file [$file]: $!";
 
-	until( eof $fh )
+ 	my $size = -s $file;
+ 	
+	COOKIE: until( eof $fh )
 		{
+		warn "-" x 73, "\n" if $Debug;
 		my $set_date = read_date( $fh );
-
-		$tag         = read_str( $fh, 4 );
-		warn( "tag is [$tag] not 'Cook'" ) unless $tag eq 'Cook';
+		warn( "\tset date is " . localtime( $set_date ) . "\n" )  
+			if $Debug;
+		my $tag      = read_str( $fh, 4 );
+		warn( "==> tag is [$tag] not 'Cook'\n" ) 
+			unless $tag eq 'Cook';
 
 		my $name    = read_var( $fh );
+		warn( "\tname is [$name]\n" ) if $Debug;
 		my $path    = read_var( $fh );
+		warn( "\tpath is [$path]\n" ) if $Debug;
 		my $domain  = read_var( $fh );
+		warn( "\tdomain is [$domain]\n" ) if $Debug;
 		my $value   = read_var( $fh );
+		warn( "\tvalue is [$value]\n" ) if $Debug;
 		
+		my $expires = read_int( $fh ) - OFFSET;
+		warn( "\texpires is " . 
+			localtime( $expires ) . "\n" ) if $Debug;
+		my $str     = read_str( $fh, 7 );
+				
+		DATE: {
+			my $pos = tell $fh;
+			warn( "read $pos of $size bytes\n" ) if $Debug > 1;
+			if( eof $fh )
+				{
+				warn( "Setting cookie [$name]\n" ) if $Debug;
+				$self->set_cookie(undef, $name, $value, $path, 
+					$domain, undef, 0, 0, $expires - time, 0);
+					
+				last COOKIE;
+				}
+				
+			my $peek    = peek( $fh, 12 );
+			warn( "\t--peek is $peek\n" ) if $Debug > 1;
+			
+			if( substr( $peek, 8, 4 ) eq 'Cook' )
+				{
+				warn( "Setting cookie [$name]\n" ) if $Debug;
+				$self->set_cookie(undef, $name, $value, $path, 
+					$domain, undef, 0, 0, $expires - time, 0);
+					
+				next COOKIE;
+				}
+
+			my $date = read_date( $fh );
+			
+			redo;
+			}
+	
 		
-		}	
-	$self->set_cookie(undef, @bits[2,3,1,0], undef,
-		0, 0, $expires - time, 0);
+		}
+		
     	
     close $fh;
     
@@ -119,7 +163,7 @@ sub save
 			my $bool = $domain =~ /^\./ ? TRUE : FALSE;
 
 	    		}
-		} );
+		);
 		
 	open my $fh, "> $file" or die "Could not write file [$file]! $!\n";
     close $fh;
@@ -127,29 +171,36 @@ sub save
 	
 sub read_int
 	{
-	my $fh;
+	my $fh = shift;
 	
 	my $result = read_str( $fh, 4 );
 	
+	my $number = unpack( "I", $result );
+	
+	return $number;
 	}
 
 sub read_date
 	{
-	my $fh;
+	my $fh = shift;
 	
-	my $string = read_str( $fh, $length );
-	warn( "tag is [$tag] not 'Date'" ) unless $tag eq 'Date';
+	my $string = read_str( $fh, 4 );
+	warn( "\t==tag is [$string] not 'Date'\n" ) unless $string eq 'Date';
 	
 	my $date = read_int( $fh );
-	warn( sprintf "read date %X | %d | %s", $set_date, $set_date,
-		scalar localtime $set_date );
+	warn( sprintf "\t==read date %X | %d | %s\n", $date, $date,
+		scalar localtime $date ) if $Debug > 1;
 	
-	return $string;
+	$date -= OFFSET;
+	warn( sprintf "\t==read date %X | %d | %s\n", $date, $date,
+		scalar localtime $date ) if $Debug > 1;
+	
+	return $date;
 	}
 	
 sub read_var
 	{
-	my $fh;
+	my $fh = shift;
 	
 	my $length = read_int( $fh );
 	my $string = read_str( $fh, $length );
@@ -159,12 +210,23 @@ sub read_var
 		
 sub read_str
 	{
-	my $fh;
-	my $length;
+	my $fh     = shift;
+	my $length = shift;
 	
-	my $result = read( $fh, $string, $length );
+	my $result = read( $fh, my $string, $length );
 	
 	return $string;
 	}
 
+sub peek
+	{
+	my $fh     = shift;
+	my $length = shift;
+	
+	my $string = read( $fh, my $string, $length );
+	
+	seek $fh, -$length, 1;
+	
+	return $string;
+	}
 1;
