@@ -3,7 +3,7 @@
 use Test::More tests => 6;
 
 use HTTP::Cookies::iCab;
-#use Data::Dumper;
+use Data::Dumper;
 
 my %Domains = qw( .cnn.com 1 .usatoday.com 3 .doubleclick.net 1);
 
