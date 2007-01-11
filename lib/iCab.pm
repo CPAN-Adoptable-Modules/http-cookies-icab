@@ -56,7 +56,7 @@ use constant OFFSET => 2_082_823_200;
 
 $VERSION = sprintf "%2d.%02d", q$Revision$ =~ m/ (\d+) \. (\d+) /xg;
 
-my $Debug = 0;
+my $Debug = $ENV{DEBUG} || 0;
 
 sub load
 	{
@@ -64,18 +64,18 @@ sub load
 
     $file ||= $self->{'file'} || return;
 
-    open my $fh, $file or die "Could not open file [$file]: $!";
+    open my $fh, '<', $file or die "Could not open file [$file]: $!";
 
  	my $size = -s $file;
 
 	COOKIE: until( eof $fh )
 		{
-		warn "-" x 73, "\n" if $Debug;
+		print STDERR "\n", "-" x 73, "\n" if $Debug;
 		my $set_date = read_date( $fh );
-		warn( "\tset date is " . localtime( $set_date ) . "\n" )
+		print STDERR ( "\tset date is " . localtime( $set_date ) . "\n" )
 			if $Debug;
 		my $tag      = read_str( $fh, 4 );
-		warn( "==> tag is [$tag] not 'Cook'\n" )
+		print STDERR ( "==> tag is [$tag] not 'Cook'\n" )
 			unless $tag eq 'Cook';
 
 		my $name    = read_var( $fh );
@@ -174,7 +174,7 @@ sub read_int
 
 	my $result = read_str( $fh, 4 );
 
-	my $number = unpack( "I", $result );
+	my $number = unpack( "N", $result );
 
 	return $number;
 	}
