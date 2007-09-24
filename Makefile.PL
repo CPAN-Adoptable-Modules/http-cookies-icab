@@ -8,6 +8,8 @@ WriteMakefile
 	'NAME'           => 'HTTP::Cookies::iCab',
 	'VERSION_FROM'   => 'lib/iCab.pm',
 	'LICENSE'       => 'perl',
+	'AUTHOR'        => 'brian d foy <bdfoy@cpan.org>',
+
 	'PREREQ_PM'      => {
 		'HTTP::Cookies'         => '1.25',
 		'Test::More'            => '0',
