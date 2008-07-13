@@ -2,6 +2,9 @@
 package HTTP::Cookies::iCab;
 use strict;
 
+use warnings;
+no warnings;
+
 =head1 NAME
 
 HTTP::Cookies::iCab - Cookie storage and management for iCab
@@ -54,7 +57,7 @@ use constant TRUE   => 'TRUE';
 use constant FALSE  => 'FALSE';
 use constant OFFSET => 2_082_823_200;
 
-$VERSION = sprintf "%2d.%02d", q$Revision$ =~ m/ (\d+) \. (\d+) /xg;
+$VERSION = '1.110';
 
 my $Debug = $ENV{DEBUG} || 0;
 
@@ -68,6 +71,9 @@ sub load
 
  	my $size = -s $file;
 
+	my $header = <$fh>;
+	#print STDERR "HEADER is [$header]\n";
+	
 	COOKIE: until( eof $fh )
 		{
 		print STDERR "\n", "-" x 73, "\n" if $Debug;
@@ -228,4 +234,5 @@ sub peek
 
 	return $string;
 	}
+
 1;
