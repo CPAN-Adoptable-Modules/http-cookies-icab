@@ -17,6 +17,7 @@ WriteMakefile
 		'HTTP::Cookies'         => '1.25',
 		'Text::Diff'            => '0',
 		},
+		
 	'PM'             => {
 		'lib/iCab.pm' => '$(INST_LIBDIR)/iCab.pm',
 		},

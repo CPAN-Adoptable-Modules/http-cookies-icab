@@ -71,7 +71,7 @@ sub load
 
  	my $size = -s $file;
 
-	my $header = <$fh>;
+	#my $header = <$fh>;
 	#print STDERR "HEADER is [$header]\n";
 	
 	COOKIE: until( eof $fh )
