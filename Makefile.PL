@@ -8,7 +8,7 @@ eval "use Test::Manifest 1.14";
 WriteMakefile
 	(
 	'NAME'           => 'HTTP::Cookies::iCab',
-	'ABSTRACT'       => 'Cookie storage and management for iCab',
+	'ABSTRACT'       => 'Cookie storage and management for iCab 3',
 	'VERSION_FROM'   => 'lib/iCab.pm',
 	'LICENSE'        => 'perl',
 	'AUTHOR'         => 'brian d foy <bdfoy@cpan.org>',

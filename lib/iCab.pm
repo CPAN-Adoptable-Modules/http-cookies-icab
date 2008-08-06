@@ -20,7 +20,9 @@ HTTP::Cookies::iCab - Cookie storage and management for iCab
 =head1 DESCRIPTION
 
 This package overrides the load() and save() methods of HTTP::Cookies
-so it can work with iCab cookie files.
+so it can work with iCab 3 cookie files. This doesn't work on iCab
+4 cookie files yet, but if you really need that, convert HTTP::Cookies::Safari
+to do what you need.
 
 See L<HTTP::Cookies>.
 
@@ -57,7 +59,7 @@ use constant TRUE   => 'TRUE';
 use constant FALSE  => 'FALSE';
 use constant OFFSET => 2_082_823_200;
 
-$VERSION = '1.110';
+$VERSION = '1.120';
 
 my $Debug = $ENV{DEBUG} || 0;
 
