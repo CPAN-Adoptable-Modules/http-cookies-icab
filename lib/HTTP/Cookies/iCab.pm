@@ -92,7 +92,8 @@ sub load
 		warn( "\tvalue is [$value]\n" ) if $Debug;
 
 		my $expires = read_int( $fh ) - OFFSET;
-		warn( "\texpires is " .
+
+		warn( "\t$name expires at " .
 			localtime( $expires ) . "\n" ) if $Debug;
 		my $str     = read_str( $fh, 7 );
 
@@ -101,7 +102,7 @@ sub load
 			warn( "read $pos of $size bytes\n" ) if $Debug > 1;
 			if( eof $fh )
 				{
-				warn( "Setting cookie [$name]\n" ) if $Debug;
+				warn( "At end of file, setting cookie [$name]\n" ) if $Debug;
 				$self->set_cookie(undef, $name, $value, $path,
 					$domain, undef, 0, 0, $expires - time, 0);
 
