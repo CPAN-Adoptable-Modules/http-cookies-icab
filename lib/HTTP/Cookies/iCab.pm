@@ -1,4 +1,3 @@
-# $Id$
 package HTTP::Cookies::iCab;
 use strict;
 
