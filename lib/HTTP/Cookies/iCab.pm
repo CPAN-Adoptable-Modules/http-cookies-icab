@@ -209,6 +209,7 @@ sub read_var
 	my $fh = shift;
 
 	my $length = read_int( $fh );
+	warn "length is $length\n" if $Debug > 1;
 	my $string = read_str( $fh, $length );
 
 	return $string;
