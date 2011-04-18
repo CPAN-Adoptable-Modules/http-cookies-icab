@@ -18,7 +18,4 @@ local $TODO = "How can I compare these files?";
 my $diff = Text::Diff::diff( $dist_file, $save_file );
 my $same = not $diff;
 ok( $same, 'Saved file is same as original' );
-#print STDERR $diff;
 }
-
-#END { unlink $save_file }

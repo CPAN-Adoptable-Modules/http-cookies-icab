@@ -22,5 +22,3 @@ foreach my $domain ( keys %Domains )
 
 is( $hash->{'.cnn.com'}{'/'}{'CNNid'}[1], '8b990c1a-20494-1039716453-329', 
 	'Cookie has right value' );
-
-#print STDERR Data::Dumper::Dumper( $jar );
