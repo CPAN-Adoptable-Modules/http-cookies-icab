@@ -140,6 +140,8 @@ sub save
 
     $file ||= $self->{'file'} || return;
 
+	open my $fh, '>:raw', $file or die "Could not write file [$file]! $!\n";
+
     $self->scan(
     	sub {
 			my( $version, $key, $val, $path, $domain, $port,
@@ -149,27 +151,22 @@ sub save
 
 			return if defined $expires && time > $expires;
 
-			$expires = do {
-				unless( $expires ) { 0 }
-				else
-					{
-					my @times = localtime( $expires );
-					$times[5] += 1900;
-					$times[4] += 1;
-
-					sprintf "%4d-%02d-%02dT%02d:%02d:%02dZ",
-						@times[5,4,3,2,1,0];
-					}
-				};
+			$expires += OFFSET;
 
 			$secure = $secure ? TRUE : FALSE;
 
 			my $bool = $domain =~ /^\./ ? TRUE : FALSE;
 
-	    		}
+			print $fh 'Date', pack( 'N', time + OFFSET ),
+				      'Cook', 
+				      pack( 'N', length $key    ), $key, 
+				      pack( 'N', length $path   ), $path,
+				      pack( 'N', length $domain ), $domain,
+				      pack( 'N', length $val    ), $val,
+				      pack( 'N', $expires );
+	    	}
 		);
 
-	open my $fh, "> $file" or die "Could not write file [$file]! $!\n";
     close $fh;
 	}
 
