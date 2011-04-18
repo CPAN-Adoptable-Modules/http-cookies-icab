@@ -1,5 +1,6 @@
 Changes
 examples/README
+examples/update_dates.pl
 hack/load_real
 lib/HTTP/Cookies/iCab.pm
 LICENSE
