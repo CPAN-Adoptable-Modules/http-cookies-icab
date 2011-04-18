@@ -72,9 +72,6 @@ sub load
 
  	my $size = -s $file;
 
-	#my $header = <$fh>;
-	#print STDERR "HEADER is [$header]\n";
-	
 	COOKIE: until( eof $fh )
 		{
 		print STDERR "\n", "-" x 73, "\n" if $Debug;
