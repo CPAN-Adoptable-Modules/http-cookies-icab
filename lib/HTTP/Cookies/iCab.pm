@@ -12,7 +12,7 @@ HTTP::Cookies::iCab - Cookie storage and management for iCab
 
 	use HTTP::Cookies::iCab;
 
-	$cookie_jar = HTTP::Cookies::iCab->new;
+	my $cookie_jar = HTTP::Cookies::iCab->new( $cookies_file );
 
 	# otherwise same as HTTP::Cookies
 
@@ -68,7 +68,7 @@ sub load
 
     $file ||= $self->{'file'} || return;
 
-    open my $fh, '<', $file or die "Could not open file [$file]: $!";
+    open my $fh, '<:raw', $file or die "Could not open file [$file]: $!";
 
  	my $size = -s $file;
 
