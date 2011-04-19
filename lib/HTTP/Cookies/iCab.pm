@@ -125,9 +125,7 @@ sub load
 			redo;
 			}
 
-
 		}
-
 
     close $fh;
 
