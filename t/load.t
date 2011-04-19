@@ -1,6 +1,6 @@
-use Test::More tests => 6;
+use Test::More tests => 8;
 
-use HTTP::Cookies::iCab;
+use_ok( 'HTTP::Cookies::iCab' );
 
 my %Domains = qw( .cnn.com 1 .usatoday.com 3 .doubleclick.net 1 );
 
