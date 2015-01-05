@@ -33,9 +33,9 @@
 	* no code changes: no need to upgrade
 
 0.91 - Fri Sep 17 13:22:59 2004
- * distribution cleanups: no need to upgrade
- * this is a non-developer release, although it might still have
- problems
+	 * distribution cleanups: no need to upgrade
+	 * this is a non-developer release, although it might still have
+	 problems
 
 0.90_01 - Thu Jan  9 04:30:48 2003
 	* DEVELOPER'S RELEASE - the save() function does not work, but
