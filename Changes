@@ -1,7 +1,7 @@
 Revision history for Perl module 
 
 1.131 - Wed Apr 20 13:55:38 2011
-	-* Update required version to Perl 5.8 for the :raw
+	* Update required version to Perl 5.8 for the :raw
 	encoding.
 
 1.130 - Mon Apr 18 17:03:23 2011
