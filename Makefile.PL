@@ -2,11 +2,14 @@ require 5.008;
 use strict;
 use warnings;
 
-my $github    = 'https://github.com/briandfoy/';
-my $main_file = 'lib/HTTP/Cookies/iCab.pm';
+use File::Spec::Functions qw(catfile);
+
+my $module    = 'HTTP::Cookies::iCab';
+my $github    = 'https://github.com/briandfoy/HTTP-Cookies-iCab';
+my $main_file = catfile( 'lib', split /::/, "$module.pm" );
 
 my %WriteMakefile = (
-	'NAME'           => 'HTTP::Cookies::iCab',
+	'NAME'           => $module,
 	'ABSTRACT_FROM'  => $main_file,
 	'VERSION_FROM'   => $main_file,
 	'LICENSE'        => 'perl',
