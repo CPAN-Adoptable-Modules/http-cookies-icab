@@ -5,6 +5,8 @@ use warnings;
 use File::Spec::Functions qw(catfile);
 
 my $module    = 'HTTP::Cookies::iCab';
+( my $dist = $module ) =~ s/::/-/g;
+
 my $github    = 'https://github.com/briandfoy/HTTP-Cookies-iCab';
 my $main_file = catfile( 'lib', split /::/, "$module.pm" );
 
