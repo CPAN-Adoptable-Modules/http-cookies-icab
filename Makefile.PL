@@ -1,10 +1,12 @@
 require 5.008;
+
+package HTTP::Cookies::iCab;
 use strict;
 use warnings;
 
 use File::Spec::Functions qw(catfile);
 
-my $module    = 'HTTP::Cookies::iCab';
+my $module    = __PACKAGE__;
 ( my $dist = $module ) =~ s/::/-/g;
 
 my $github    = 'https://github.com/briandfoy/HTTP-Cookies-iCab';
