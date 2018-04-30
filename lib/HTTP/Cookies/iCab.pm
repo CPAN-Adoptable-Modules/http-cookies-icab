@@ -152,8 +152,8 @@ sub save
 			my $bool = $domain =~ /^\./ ? TRUE : FALSE;
 
 			print $fh 'Date', pack( 'N', time + OFFSET ),
-				      'Cook', 
-				      pack( 'N', length $key    ), $key, 
+				      'Cook',
+				      pack( 'N', length $key    ), $key,
 				      pack( 'N', length $path   ), $path,
 				      pack( 'N', length $domain ), $domain,
 				      pack( 'N', length $val    ), $val,
