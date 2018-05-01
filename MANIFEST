@@ -11,7 +11,6 @@ MANIFEST.SKIP
 README.pod
 t/compile.t
 t/Cookies.dat
-t/Cookies2.dat
 t/load.t
 t/pod.t
 t/pod_coverage.t
